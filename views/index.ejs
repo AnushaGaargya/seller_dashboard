@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>HELLO WORLD!!!</h1>
+
+
+   <form action="/" method="POST">
+      
+       
+        <label for="prodname">Product Name:</label><br>
+        <input type="text" id="prodname" name="prodname"><br>
+        <label for="price">Selling Price:</label><br>
+        <input type="number" id="price" name="price"><br>
+        <label for="stock">Stock:</label><br>
+        <input type="text" id="stock" name="stock"><br><br>
+        <input type="submit" value="Submit">
+        <br>
+        <br>
+        <table>
+        
+            <tr>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Stock</th>
+                <th>Delete</th>
+            </tr> 
+            <% total = 0 %>
+            <% for (let i=0; i < itms.length; i++){ %>
+                <% total = total + (itms[i])['dataValues']['price'] * (itms[i])['dataValues']['stock'] %>
+                <tr>
+                    <td>
+                    <%= (itms[i])['dataValues']['prod_name'] %>
+                    </td>
+                    <td>
+                    <%= (itms[i])['dataValues']['price'] %>
+                    </td>
+                    <td>
+                    <%= (itms[i])['dataValues']['stock'] %>
+                    </td>
+                    <td>
+                        <form action="/del" method="POST" >
+                            <input type="hidden" name="id" value="<%= (itms[i])['dataValues']['id']%>" >
+                            <button class="btn" type="submit">Delete</button> 
+                        </form>
+                    </td>
+                </tr>
+            <% } %>
+        
+        </table>
+        <p>Total price of all products: <%= total %></p>
+
+   </form>
+   
+</body>
+
+</html>
